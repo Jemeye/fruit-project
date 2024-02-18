@@ -1,17 +1,27 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import { useEffect } from 'react';
 import './App.css'
 import Footer from './components/footer'
 import Header from './components/header'
+import FruitList from './pages/fruit-list';
+import { useNavigate } from "react-router-dom";
 
 function Home() {
-  // const [count, setCount] = useState(0)
+
+  const navigate = useNavigate();
+  const isAuthenticated = localStorage.getItem('user');
+
+  useEffect(() => {
+    if (isAuthenticated === null) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
+
 
   return (
     <>
-    <Header></Header>
-    <Footer></Footer>
+      <Header></Header>
+      <FruitList></FruitList>
+      <Footer></Footer>
     </>
   )
 }
